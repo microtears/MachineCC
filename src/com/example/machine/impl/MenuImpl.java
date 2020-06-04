@@ -14,11 +14,11 @@ public class MenuImpl implements Menu.SubMenu, Menu.MenuItem {
         this(false, null);
     }
 
-    public MenuImpl(boolean isSubMenu) {
-        this(isSubMenu, null);
+    public MenuImpl(Menu parent) {
+        this(true, parent);
     }
 
-    public MenuImpl(boolean isSubMenu, Menu parent) {
+    private MenuImpl(boolean isSubMenu, Menu parent) {
         this.isSubMenu = isSubMenu;
         this.parent = parent;
     }
