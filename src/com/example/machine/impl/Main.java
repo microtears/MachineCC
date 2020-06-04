@@ -32,7 +32,12 @@ public class Main {
     }
 
     private static MenuImpl getMainMenu(Machine machine, ConfigurationBuilder builder) {
-        MenuImpl menu = new MenuImpl();
+        MenuImpl menu = new MenuImpl() {
+            @Override
+            public String getName() {
+                return "MainMenu";
+            }
+        };
         menu.addItem(new Menu.MenuItem() {
             @Override
             public String getName() {
