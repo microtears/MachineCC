@@ -26,6 +26,7 @@ public class Main {
                 menuItem.select();
             } catch (Exception e) {
                 e.printStackTrace();
+                mainMenu.open();
             }
         }
     }
