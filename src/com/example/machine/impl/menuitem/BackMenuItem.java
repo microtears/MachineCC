@@ -1,4 +1,4 @@
-package com.example.machine.impl;
+package com.example.machine.impl.menuitem;
 
 import com.example.machine.Menu;
 

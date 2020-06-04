@@ -1,6 +1,7 @@
 package com.example.machine.impl;
 
 import com.example.machine.*;
+import com.example.machine.impl.menuitem.*;
 
 import java.util.Scanner;
 
@@ -38,54 +39,10 @@ public class Main {
                 return "MainMenu";
             }
         };
-        menu.addItem(new Menu.MenuItem() {
-            @Override
-            public String getName() {
-                return "powerOn";
-            }
-
-            @Override
-            public void select() {
-                machine.powerOn();
-                menu.open();
-            }
-        });
-        menu.addItem(new Menu.MenuItem() {
-            @Override
-            public String getName() {
-                return "powerOff";
-            }
-
-            @Override
-            public void select() {
-                machine.powerOff();
-                menu.open();
-            }
-        });
-        menu.addItem(new Menu.MenuItem() {
-            @Override
-            public String getName() {
-                return "pause";
-            }
-
-            @Override
-            public void select() {
-                machine.pause();
-                menu.open();
-            }
-        });
-        menu.addItem(new Menu.MenuItem() {
-            @Override
-            public String getName() {
-                return "start";
-            }
-
-            @Override
-            public void select() {
-                machine.start(builder.build(), new FinishTip());
-                menu.open();
-            }
-        });
+        menu.addItem(new PowerOnMenuItem(machine, menu));
+        menu.addItem(new PowerOffMenuItem(machine, menu));
+        menu.addItem(new PauseMenuItem(machine, menu));
+        menu.addItem(new StartMenuItem(machine, builder, menu));
         menu.addItem(getLevelMenu(menu, machine, builder));
         menu.addItem(getModeMenu(menu, machine, builder));
         menu.addItem(getTimeMenu(menu, machine, builder));

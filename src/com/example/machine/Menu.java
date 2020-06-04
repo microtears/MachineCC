@@ -11,6 +11,7 @@ public interface Menu {
 
     interface SubMenu extends Menu {
         void back();
+
         Menu getParent();
     }
 
