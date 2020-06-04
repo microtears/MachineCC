@@ -31,8 +31,8 @@ public class Main {
     }
 
     private static MenuImpl getMainMenu(Machine machine, ConfigurationBuilder builder) {
-        MenuImpl MenuImpl = new MenuImpl();
-        MenuImpl.addItem(new Menu.MenuItem() {
+        MenuImpl menu = new MenuImpl();
+        menu.addItem(new Menu.MenuItem() {
             @Override
             public String getName() {
                 return "powerOn";
@@ -41,10 +41,10 @@ public class Main {
             @Override
             public void select() {
                 machine.powerOn();
-                MenuImpl.open();
+                menu.open();
             }
         });
-        MenuImpl.addItem(new Menu.MenuItem() {
+        menu.addItem(new Menu.MenuItem() {
             @Override
             public String getName() {
                 return "powerOff";
@@ -53,10 +53,10 @@ public class Main {
             @Override
             public void select() {
                 machine.powerOff();
-                MenuImpl.open();
+                menu.open();
             }
         });
-        MenuImpl.addItem(new Menu.MenuItem() {
+        menu.addItem(new Menu.MenuItem() {
             @Override
             public String getName() {
                 return "pause";
@@ -65,10 +65,10 @@ public class Main {
             @Override
             public void select() {
                 machine.pause();
-                MenuImpl.open();
+                menu.open();
             }
         });
-        MenuImpl.addItem(new Menu.MenuItem() {
+        menu.addItem(new Menu.MenuItem() {
             @Override
             public String getName() {
                 return "start";
@@ -77,26 +77,26 @@ public class Main {
             @Override
             public void select() {
                 machine.start(builder.build(), new FinishTip());
-                MenuImpl.open();
+                menu.open();
             }
         });
-        MenuImpl.addItem(getLevelMenu(MenuImpl, machine, builder));
-        MenuImpl.addItem(getModeMenu(MenuImpl, machine, builder));
-        MenuImpl.addItem(getTimeMenu(MenuImpl, machine, builder));
-        MenuImpl.addItem(getWaterVolumeMenu(MenuImpl, machine, builder));
-        MenuImpl.addItem(new ExitMenuItem());
-        return MenuImpl;
+        menu.addItem(getLevelMenu(menu, machine, builder));
+        menu.addItem(getModeMenu(menu, machine, builder));
+        menu.addItem(getTimeMenu(menu, machine, builder));
+        menu.addItem(getWaterVolumeMenu(menu, machine, builder));
+        menu.addItem(new ExitMenuItem());
+        return menu;
     }
 
     private static MenuImpl getLevelMenu(Menu parent, Machine machine, ConfigurationBuilder builder) {
-        MenuImpl MenuImpl = new MenuImpl(parent) {
+        MenuImpl menu = new MenuImpl(parent) {
             @Override
             public String getName() {
                 return "LevelMenu";
             }
         };
         for (Level level : Level.values()) {
-            MenuImpl.addItem(new Menu.MenuItem() {
+            menu.addItem(new Menu.MenuItem() {
                 @Override
                 public String getName() {
                     return level.name();
@@ -108,22 +108,22 @@ public class Main {
                         System.out.println("select " + getName());
                         builder.setLevel(level);
                     }
-                    MenuImpl.open();
+                    menu.open();
                 }
             });
         }
-        return MenuImpl;
+        return menu;
     }
 
     private static MenuImpl getModeMenu(Menu parent, Machine machine, ConfigurationBuilder builder) {
-        MenuImpl MenuImpl = new MenuImpl(parent) {
+        MenuImpl menu = new MenuImpl(parent) {
             @Override
             public String getName() {
                 return "ModeMenu";
             }
         };
         for (Mode mode : Mode.values()) {
-            MenuImpl.addItem(new Menu.MenuItem() {
+            menu.addItem(new Menu.MenuItem() {
                 @Override
                 public String getName() {
                     return mode.name();
@@ -135,22 +135,22 @@ public class Main {
                         System.out.println("select " + getName());
                         builder.setMode(mode);
                     }
-                    MenuImpl.open();
+                    menu.open();
                 }
             });
         }
-        return MenuImpl;
+        return menu;
     }
 
     private static MenuImpl getTimeMenu(Menu parent, Machine machine, ConfigurationBuilder builder) {
-        MenuImpl MenuImpl = new MenuImpl(parent) {
+        MenuImpl menu = new MenuImpl(parent) {
             @Override
             public String getName() {
                 return "TimeMenu";
             }
         };
         for (Time time : Time.values()) {
-            MenuImpl.addItem(new Menu.MenuItem() {
+            menu.addItem(new Menu.MenuItem() {
                 @Override
                 public String getName() {
                     return time.name();
@@ -162,22 +162,22 @@ public class Main {
                         System.out.println("select " + getName());
                         builder.setTime(time);
                     }
-                    MenuImpl.open();
+                    menu.open();
                 }
             });
         }
-        return MenuImpl;
+        return menu;
     }
 
     private static MenuImpl getWaterVolumeMenu(Menu parent, Machine machine, ConfigurationBuilder builder) {
-        MenuImpl MenuImpl = new MenuImpl(parent) {
+        MenuImpl menu = new MenuImpl(parent) {
             @Override
             public String getName() {
                 return "WaterVolumeMenu";
             }
         };
         for (WaterVolume waterVolume : WaterVolume.values()) {
-            MenuImpl.addItem(new Menu.MenuItem() {
+            menu.addItem(new Menu.MenuItem() {
                 @Override
                 public String getName() {
                     return waterVolume.name();
@@ -189,11 +189,11 @@ public class Main {
                         System.out.println("select " + getName());
                         builder.setWaterVolume(waterVolume);
                     }
-                    MenuImpl.open();
+                    menu.open();
                 }
             });
         }
-        return MenuImpl;
+        return menu;
     }
 
     private static boolean checkMachineStat(Machine machine) {
